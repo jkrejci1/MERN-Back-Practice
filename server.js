@@ -1,3 +1,6 @@
+//THIS WORKED DO AS IS HERE FOR CREATING CONNECTION BETWEEN FRONT AND BACK END YEEESSSSSSSSSSS WOOOOPPPYYYY
+
+
 /**
  * Requests:
  * GET -> Gets info from backend/database
@@ -12,7 +15,7 @@ require('dotenv').config()
 
 //Require express
 const express = require('express')
-const cors = require('cors') //Require cors for cross servers
+const path = require('path')
 
 //Require mongoose for database
 const mongoose = require('mongoose')
@@ -20,15 +23,11 @@ const mongoose = require('mongoose')
 //Require the routes
 const workoutRoutes = require('./routes/workouts')
 
+const PORT = process.env.PORT || 5000
+
 //Connect to MongoDB RETURNS A PROMISE
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        //After we've connected to the database 
-        //Listen for requests on port for requests
-        app.listen(process.env.PORT, () => {
-            console.log("Connected to DB and listening on port", process.env.PORT)
-        })
-    })
+mongoose.connect("mongodb+srv://jkrejci1988:12345@mernapp.qtbtpsh.mongodb.net/?retryWrites=true&w=majority")
+
     .catch((error) => {
         console.log(error) //Log any error that happens when trying to connect
     })
@@ -38,7 +37,7 @@ const app = express()
 
 //Create middleware to use json to access data in the requests later in routes
 app.use(express.json()) //Any request that comes in -> Passes data to requests object to access in request handler
-app.use(cors()) //Corse protects from cross orgigin errors
+app.use(express.static(path.join(__dirname + "/public"))) //Attempt for connecting MERN FRONT TO BACK
 
 //Register global middleware
 app.use((req, res, next) => {
@@ -49,3 +48,5 @@ app.use((req, res, next) => {
 
 //Routes (/api/workouts -> Only fire these routes when you come to the first path, can be anything)
 app.use('/api/workouts', workoutRoutes) //So when we fire to '/api/workouts' then we need to use those specific routes that will check for the route after the last forward slash from the given requirement -> for any request -> GET POST DELETE ... etc
+
+app.listen(PORT)
