@@ -22,6 +22,8 @@ const mongoose = require('mongoose')
 
 //Require the routes
 const workoutRoutes = require('./routes/workouts')
+const userRoutes = require('./routes/user')
+
 
 const PORT = process.env.PORT || 5000
 
@@ -48,5 +50,6 @@ app.use((req, res, next) => {
 
 //Routes (/api/workouts -> Only fire these routes when you come to the first path, can be anything)
 app.use('/api/workouts', workoutRoutes) //So when we fire to '/api/workouts' then we need to use those specific routes that will check for the route after the last forward slash from the given requirement -> for any request -> GET POST DELETE ... etc
+app.use('/api/user', userRoutes) //So when we fire to '/api/workouts' then we need to use those specific routes that will check for the route after the last forward slash from the given requirement -> for any request -> GET POST DELETE ... etc
 
 app.listen(PORT)
