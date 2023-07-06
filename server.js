@@ -17,6 +17,9 @@ require('dotenv').config()
 const express = require('express')
 const path = require('path')
 
+//Use cors for cross server communication
+var cors = require('cors')
+
 //Require mongoose for database
 const mongoose = require('mongoose')
 
@@ -40,6 +43,7 @@ const app = express()
 //Create middleware to use json to access data in the requests later in routes
 app.use(express.json()) //Any request that comes in -> Passes data to requests object to access in request handler
 app.use(express.static(path.join(__dirname + "/public"))) //Attempt for connecting MERN FRONT TO BACK
+app.use(cors())
 
 //Register global middleware
 app.use((req, res, next) => {
