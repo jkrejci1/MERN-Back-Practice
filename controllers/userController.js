@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 
 //Function for creating tokens for later (pass in something unique for the token to use, we'll use a user id stored in mongo -> will be a part of the payload)
 const createToken = (_id) => {
-    return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' }) //Take in payload unique thing and secret code (keep it secret -> use in .env as SECRET) and takes when it expires in days here
+    return jwt.sign({_id}, process.env.SECRET || "nayfuaskjf01013eubreiwgfbn1238173tgrebu", { expiresIn: '3d' }) //Take in payload unique thing and secret code (keep it secret -> use in .env as SECRET) and takes when it expires in days here
 }
 
 
