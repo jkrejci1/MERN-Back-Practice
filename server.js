@@ -42,6 +42,8 @@ const app = express()
 
 //Create middleware to use json to access data in the requests later in routes
 app.use(express.json()) //Any request that comes in -> Passes data to requests object to access in request handler
+
+//UNCOMMENT WHEN WE WANT TO PUSH TO AZURE AND CREATE NEW BUILD IN THE FRONT END TO HAVE THOSE FILES REPLACE ANY UPDATED PUBLIC FOLDER BUILD FILES
 app.use(express.static(path.join(__dirname + "/public"))) //Attempt for connecting MERN FRONT TO BACK
 app.use(cors())
 
