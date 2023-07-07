@@ -58,7 +58,8 @@ app.use((req, res, next) => {
 app.use('/api/workouts', workoutRoutes) //So when we fire to '/api/workouts' then we need to use those specific routes that will check for the route after the last forward slash from the given requirement -> for any request -> GET POST DELETE ... etc
 app.use('/api/user', userRoutes) //So when we fire to '/api/workouts' then we need to use those specific routes that will check for the route after the last forward slash from the given requirement -> for any request -> GET POST DELETE ... etc
 
-//Fixes loading error on login and signup page where there isn't any get requests
+//COMMENT WHEN TESTING OUT WHEN NOT PUSHING TO AZURE
+//Fixes loading error on login and signup page where there isn't any get requests; when we refresh on the page and get failed to GET /*
 app.get('/login', function(req, res) {
     res.sendFile(path.join(__dirname, 'public/index.html'), function(err) {
       if (err) {
@@ -66,13 +67,14 @@ app.get('/login', function(req, res) {
       }
     })
   })
-  app.get('/signup', function(req, res) {
+app.get('/signup', function(req, res) {
     res.sendFile(path.join(__dirname, 'public/index.html'), function(err) {
       if (err) {
         res.status(500).send(err)
       }
     })
   })
+
 
 //Might need to put login and signup here if we want to be able to refresh those pages that's WHY WE GET THE /login or /signup ERRORS WHEN REFRESHING THOSE PAGES OR ENTERING THEM MANUALLY BUT NOT WHEN WE CLICK ON THE BUTTON
 app.listen(PORT)
