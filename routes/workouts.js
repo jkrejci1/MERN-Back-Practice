@@ -8,6 +8,11 @@ const {
     deleteWorkout,
     updateWorkout
 } = require('../controllers/workoutController')
+//Require auth route
+const requireAuth = require('../middleware/requireAuth')
+
+//Use requireAuth to make sure that certain routes are protected for the workouts routes
+router.use(requireAuth)
 
 //GET all workouts
 router.get('/', getWorkouts)
