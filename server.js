@@ -75,6 +75,5 @@ app.get('/signup', function(req, res) {
     })
   })
 
-
 //Might need to put login and signup here if we want to be able to refresh those pages that's WHY WE GET THE /login or /signup ERRORS WHEN REFRESHING THOSE PAGES OR ENTERING THEM MANUALLY BUT NOT WHEN WE CLICK ON THE BUTTON
 app.listen(PORT)

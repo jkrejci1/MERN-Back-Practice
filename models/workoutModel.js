@@ -16,6 +16,12 @@ const workoutSchema = new Schema({
     load: {
         type: Number,
         required: true
+    },
+
+    //To have a workout associated with a user to only show on their pages
+    user_id: {
+        type: String,
+        required: true
     }
 }, { timestamps: true }) //Use timestamps -> automatically makes a created stamp for us and when it was last updated (not required)
 

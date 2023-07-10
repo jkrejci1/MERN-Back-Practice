@@ -6,8 +6,10 @@ const mongoose = require('mongoose')
 
 //Get all workouts
 const getWorkouts = async (req, res) => {
+    const user_id = req.user._id
     //You can put values in the {} to get specific docs
-    const workOuts = await Workout.find({}).sort({createdAt: -1}) //Lists in descending order by newest ones on the top
+    //Only find documents that have the user_id of the current logged in user
+    const workOuts = await Workout.find({user_id}).sort({createdAt: -1}) //Lists in descending order by newest ones on the top
     res.status(200).json(workOuts)
 }
 
@@ -58,8 +60,9 @@ const createWorkout = async (req, res) => {
     //Add doc to DB
     //Need to use try catch block when working with data like this back and forth
     try {
+        const user_id = req.user._id //Get the current user model data as we know we must have a user if we're on the page to get the workouts
         //Creates a workout object with the give requested title, load, reps set to its values corresponding in the schema
-        const workout = await Workout.create({title, load, reps}) //This is async need to use await
+        const workout = await Workout.create({title, load, reps, user_id}) //This is async need to use await
         res.status(200).json(workout) //Respond with the workout document to log it was made
     } catch(error) {
         console.log("ERROR:", error.message) //WE ARE GETTING THE ERROR OK
